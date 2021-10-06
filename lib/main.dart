@@ -1,6 +1,10 @@
+//@ dart=2.9
+import 'package:dictionary_app_bloc/bussinies_logic/cubits/dictionary_cubit.dart';
+import 'package:dictionary_app_bloc/data/repository/word_repo.dart';
 import 'package:dictionary_app_bloc/presentation/pages/home/home_page.dart';
 import 'package:dictionary_app_bloc/presentation/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +22,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: BlocProvider(
+        child: HomePage(),
+        create: (context) => DictionaryCubit(WordRepository()),
+      ),
     );
   }
 }
